@@ -2,7 +2,7 @@ package cs489.apsd.dentalsurgeryapp;
 
 import cs489.apsd.dentalsurgeryapp.domain.*;
 import cs489.apsd.dentalsurgeryapp.repository.*;
-import cs489.apsd.dentalsurgeryapp.service.AddressService;
+import cs489.apsd.dentalsurgeryapp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,16 +16,16 @@ import java.util.List;
 public class DentalsurgeryappApplication implements CommandLineRunner {
 
 	@Autowired
-	private DentistReporitory dentistReporitory;
+	private DentistService dentistService;
 
 	@Autowired
-	private PatientRepository patientRepository;
+	private PatientService patientService;
 
 	@Autowired
-	private AppointmentRepository appointmentRepository;
+	private AppointmentService appointmentService;
 
 	@Autowired
-	private SurgeryRepository surgeryRepository;
+	private SurgeryService surgeryService;
 
 	@Autowired
 	private AddressService addressService;
@@ -111,15 +111,15 @@ public class DentalsurgeryappApplication implements CommandLineRunner {
 		surgery2.setAppointments(List.of(appointment3,appointment6));
 		surgery3.setAppointments(List.of(appointment5));
 
-		dentistReporitory.saveAll(List.of(dentist1, dentist2,dentist3));
-		patientRepository.saveAll(List.of(patient1, patient2,patient3, patient4));
-		surgeryRepository.saveAll(List.of(surgery1, surgery2,surgery3));
+		dentistService.addDentistList(List.of(dentist1, dentist2,dentist3));
+		patientService.savePatientList(List.of(patient1, patient2,patient3, patient4));
+		surgeryService.addSurgeryList(List.of(surgery1, surgery2,surgery3));
 
-	    appointmentRepository.saveAll(List.of(appointment1, appointment2,appointment3, appointment4, appointment5, appointment6));
+	    appointmentService.addAppointmentList(List.of(appointment1, appointment2,appointment3, appointment4, appointment5, appointment6));
 
 
 		//List<Appointment> appointments = List.of(appointment1, appointment2, appointment3, appointment4, appointment5, appointment6);
-		List<Appointment> appointments = appointmentRepository.findAll();
+		List<Appointment> appointments = appointmentService.getAllAppointments();
 
 		System.out.printf("\ndentistName\t|\tpatNumber\t|\tpatName\t|\tappointment Date time\t|\tsurgeryNo\n");
 		System.out.println("================================================================================");

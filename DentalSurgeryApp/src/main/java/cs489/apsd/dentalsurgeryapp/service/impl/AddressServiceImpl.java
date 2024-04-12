@@ -18,4 +18,9 @@ class AddressServiceImpl implements AddressService {
     public List<Address> addAddressList(List<Address> addresses) {
       return addressRepository.saveAll(addresses);
     }
+
+    @Override
+    public Address addAddress(Address address) {
+        return addressRepository.save(address);
+    }
 }
