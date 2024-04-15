@@ -7,5 +7,6 @@ import java.util.List;
 public interface AddressService {
 
     List<Address> addAddressList(List<Address> addresses);
+    List<Address> getAllAddress();
     Address addAddress(Address address);
 }

@@ -1,11 +1,17 @@
 package cs489.apsd.dentalsurgeryapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,10 +29,22 @@ public class Patient {
     private String phoneNumber;
     private String email;
     private LocalDate dob;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "mailingAddressId")
+    @JsonBackReference
     private Address mailingAddress;
 
-    @OneToMany(mappedBy = "patient")
-    private List<Appointment> appointments;
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+
+    private List<Appointment> appointments = new ArrayList<>();
+
+    public Patient(String patientNumber, String firstName, String lastName, String phoneNumber, String email, LocalDate dob, Address mailingAddress) {
+        this.patientNumber = patientNumber;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.dob = dob;
+        this.mailingAddress = mailingAddress;
+    }
 }

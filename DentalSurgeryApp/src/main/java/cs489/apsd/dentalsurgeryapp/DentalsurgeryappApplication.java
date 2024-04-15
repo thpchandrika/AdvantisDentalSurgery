@@ -38,7 +38,7 @@ public class DentalsurgeryappApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		System.out.println("Welcome to Advantis Dental Surgery");
 		System.out.println("================================================================================");
-		showDataTables();
+		//showDataTables();
 	}
 
 	private void showDataTables(){
@@ -53,10 +53,10 @@ public class DentalsurgeryappApplication implements CommandLineRunner {
 				"periodontics", null);
 
 
-	   var address = new Address(null,"1000 N 4th St", "54334", "Fairfield", "Iowa");
-	   var address1 = new Address(null,"100 N 4th St", "54334", "Fairfield", "Iowa");
-	   var address2 = new Address(null,"10 N 4th St", "54334", "Fairfield", "Iowa");
-	   var address3 = new Address(null,"101 N 4th St", "54334", "Fairfield", "Iowa");
+	   var address = new Address(null,"1000 N 4th St", "54334", "Fairfield", "Iowa",null);
+	   var address1 = new Address(null,"100 N 4th St", "54334", "Fairfield", "Iowa", null);
+	   var address2 = new Address(null,"10 N 4th St", "54334", "Fairfield", "Iowa", null);
+	   var address3 = new Address(null,"101 N 4th St", "54334", "Fairfield", "Iowa", null);
 
 	   addressService.addAddressList(List.of(address1, address2,address3,address));
 

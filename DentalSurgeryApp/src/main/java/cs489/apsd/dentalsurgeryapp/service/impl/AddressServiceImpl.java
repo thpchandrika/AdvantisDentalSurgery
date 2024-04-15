@@ -20,6 +20,11 @@ class AddressServiceImpl implements AddressService {
     }
 
     @Override
+    public List<Address> getAllAddress() {
+        return addressRepository.findAll();
+    }
+
+    @Override
     public Address addAddress(Address address) {
         return addressRepository.save(address);
     }

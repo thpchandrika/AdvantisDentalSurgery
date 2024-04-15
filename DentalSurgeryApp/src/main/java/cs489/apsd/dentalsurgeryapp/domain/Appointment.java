@@ -1,5 +1,6 @@
 package cs489.apsd.dentalsurgeryapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,13 +27,16 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name = "surgeryId")
+//    @JsonBackReference
     private Surgery surgery;
 
     @ManyToOne
     @JoinColumn(name = "dentistId")
+//    @JsonBackReference
     private Dentist dentist;
 
     @ManyToOne
     @JoinColumn(name = "patientId")
+//   @JsonBackReference
     private Patient patient;
 }
