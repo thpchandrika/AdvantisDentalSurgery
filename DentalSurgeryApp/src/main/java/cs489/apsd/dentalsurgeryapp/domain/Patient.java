@@ -35,7 +35,7 @@ public class Patient {
     private Address mailingAddress;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-
+    @JsonBackReference
     private List<Appointment> appointments = new ArrayList<>();
 
     public Patient(String patientNumber, String firstName, String lastName, String phoneNumber, String email, LocalDate dob, Address mailingAddress) {

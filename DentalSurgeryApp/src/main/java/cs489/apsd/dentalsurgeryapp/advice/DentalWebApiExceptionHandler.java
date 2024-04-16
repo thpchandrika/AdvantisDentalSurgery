@@ -1,6 +1,7 @@
 package cs489.apsd.dentalsurgeryapp.advice;
 
 import cs489.apsd.dentalsurgeryapp.dto.ResponseDto;
+import cs489.apsd.dentalsurgeryapp.exceptions.DentistNotFoundException;
 import cs489.apsd.dentalsurgeryapp.exceptions.PatientNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,17 @@ public class DentalWebApiExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(DentistNotFoundException.class)
+    protected ResponseEntity<ResponseDto> handleDentistNotFoundException(DentistNotFoundException ex) {
+        var response = new ResponseDto(false,
+                null,
+                HttpStatus.BAD_REQUEST.value(),
+                ex.getMessage(),
+                null
+        );
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(HttpServerErrorException.InternalServerError.class)
     protected ResponseEntity<ResponseDto> handleInternalServerError(HttpServerErrorException.InternalServerError internalServerError) {
         var response = new ResponseDto(false,
@@ -53,19 +65,19 @@ public class DentalWebApiExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-//    @ExceptionHandler(MethodArgumentNotValidException.class)
-//    protected ResponseEntity<ResponseDto> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
-//        Map<String, String> fieldError = new HashMap<>();
-//        List<FieldError> fieldErrors= ex.getBindingResult().getFieldErrors();
-//        for (FieldError error : fieldErrors) {
-//            fieldError.put(error.getField(), error.getDefaultMessage());
-//        }
-//        var response = new ResponseDto(false,
-//                null,
-//                HttpStatus.BAD_REQUEST.value(),
-//                null,
-//                fieldError
-//        );
-//        return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
-//    }
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    protected ResponseEntity<ResponseDto> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
+        Map<String, String> fieldError = new HashMap<>();
+        List<FieldError> fieldErrors= ex.getBindingResult().getFieldErrors();
+        for (FieldError error : fieldErrors) {
+            fieldError.put(error.getField(), error.getDefaultMessage());
+        }
+        var response = new ResponseDto(false,
+                null,
+                HttpStatus.BAD_REQUEST.value(),
+                null,
+                fieldError
+        );
+        return new ResponseEntity<>(response,HttpStatus.BAD_REQUEST);
+    }
 }

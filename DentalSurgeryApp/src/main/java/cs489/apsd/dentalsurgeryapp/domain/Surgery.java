@@ -1,5 +1,6 @@
 package cs489.apsd.dentalsurgeryapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,10 +20,11 @@ public class Surgery {
     private String number;
     private String name;
     private String phone;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, fetch =FetchType.EAGER)
     @JoinColumn(name = "surgeryLocationId", nullable = false)
     private Address locationAddress;
 
     @OneToMany(mappedBy = "surgery")
+    @JsonBackReference
     private List<Appointment> appointments;
 }

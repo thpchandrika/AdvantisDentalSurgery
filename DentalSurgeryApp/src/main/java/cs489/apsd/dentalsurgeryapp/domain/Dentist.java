@@ -1,5 +1,6 @@
 package cs489.apsd.dentalsurgeryapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,5 +25,16 @@ public class Dentist {
     private String specialization;
 
     @OneToMany(mappedBy = "dentist")
+    @JsonBackReference
     private List<Appointment> appointments;
+
+    public Dentist(String dentistID, String firstName, String lastName,
+                   String phoneNumber, String email, String specialization) {
+        this.dentistID = dentistID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.specialization = specialization;
+    }
 }

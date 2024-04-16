@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/addresses")
+@RequestMapping("/adsweb/api/v1/addresses")
 public class AddressController {
 
     @Autowired
     private AddressService addressService;
 
-    @GetMapping()
+    @GetMapping("/")
     public ResponseEntity<List<Address>> getAddressList(){
         var addresses =  addressService.getAllAddress();
         var response = new ResponseDto(true,
