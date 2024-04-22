@@ -7,6 +7,7 @@ import cs489.apsd.dentalsurgeryapp.dto.patient.PatientResponse;
 import cs489.apsd.dentalsurgeryapp.exceptions.PatientNotFoundException;
 import cs489.apsd.dentalsurgeryapp.service.AddressService;
 import cs489.apsd.dentalsurgeryapp.service.PatientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,7 +60,7 @@ public class PatientController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<?> addPatient(@RequestBody PatientRequest request){
+    public ResponseEntity<?> addPatient(@RequestBody @Valid PatientRequest request){
         var newPatient = patientService.savePatient(request);
         var response = new ResponseDto(true,
                 newPatient,
