@@ -21,13 +21,13 @@ public class AddressController {
     private AddressService addressService;
 
     @GetMapping("/")
-    public ResponseEntity<List<Address>> getAddressList(){
+    public ResponseEntity<ResponseDto> getAddressList(){
         var addresses =  addressService.getAllAddress();
         var response = new ResponseDto(true,
                 addresses,
                 HttpStatus.OK.value(),
                 null,
                 null);
-        return new ResponseEntity<>(addresses, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

@@ -30,6 +30,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public List<PatientResponse> getAllPatients() {
+       patientRepository.findAll().stream().forEach(p -> System.out.println(p.getMailingAddress().getId()));
         var list = patientRepository.findAll(Sort.by("lastName"))
                 .stream()
                 .map(p-> new PatientResponse(

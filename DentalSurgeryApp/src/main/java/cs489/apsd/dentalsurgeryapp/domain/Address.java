@@ -1,6 +1,8 @@
 package cs489.apsd.dentalsurgeryapp.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,10 +24,12 @@ public class Address {
     private String state;
 
     @OneToOne(mappedBy = "mailingAddress")
-    @JsonManagedReference
+    @JsonIgnoreProperties({"mailingAddress","appointments"})
+    @JsonIgnore()
     private Patient patient;
 
     public Address(Integer id, String street, String zip, String city, String state) {
+        this.id = id;
         this.street = street;
         this.zip = zip;
         this.city = city;

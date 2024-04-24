@@ -31,11 +31,12 @@ public class Patient {
     private LocalDate dob;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "mailingAddressId")
-    @JsonBackReference
+    @JsonIgnoreProperties("patient")
     private Address mailingAddress;
 
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonBackReference
+    //@JsonIgnoreProperties("patient")
+    @JsonIgnore
     private List<Appointment> appointments = new ArrayList<>();
 
     public Patient(String patientNumber, String firstName, String lastName, String phoneNumber, String email, LocalDate dob, Address mailingAddress) {

@@ -1,6 +1,7 @@
 package cs489.apsd.dentalsurgeryapp.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,6 +28,6 @@ public class Role {
     }
 
     @ManyToMany(mappedBy = "roles")
-    @JsonBackReference
+    @JsonIgnoreProperties("roles")
     private List<User> users;
 }

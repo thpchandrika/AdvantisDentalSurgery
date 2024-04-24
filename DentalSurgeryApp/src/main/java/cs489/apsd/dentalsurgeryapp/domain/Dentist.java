@@ -1,6 +1,7 @@
 package cs489.apsd.dentalsurgeryapp.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,7 +26,7 @@ public class Dentist {
     private String specialization;
 
     @OneToMany(mappedBy = "dentist")
-    @JsonBackReference
+    @JsonIgnoreProperties("dentist")
     private List<Appointment> appointments;
 
     public Dentist(String dentistID, String firstName, String lastName,

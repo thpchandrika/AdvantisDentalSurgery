@@ -1,6 +1,6 @@
 package cs489.apsd.dentalsurgeryapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,7 +33,7 @@ public class User implements UserDetails {
            joinColumns = @JoinColumn(name = "userId"),
            inverseJoinColumns = @JoinColumn(name = "roleId")
     )
-    @JsonManagedReference
+    @JsonIgnoreProperties("users")
     private List<Role> roles;
 
     //Data for implementing methods from UserDetails interface

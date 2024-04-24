@@ -19,24 +19,24 @@ public class AppointmentController {
     private AppointmentService appointmentService;
 
     @GetMapping("/")
-    public ResponseEntity<List<Appointment>> getAllAppointment(){
+    public ResponseEntity<ResponseDto> getAllAppointment(){
         var appointments =  appointmentService.getAllAppointments();
         var response = new ResponseDto(true,
                 appointments,
                 HttpStatus.OK.value(),
                 null,
                 null);
-        return new ResponseEntity<>(appointments, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/")
-    public ResponseEntity<Appointment> bookAppointment(@RequestBody Appointment appointment){
+    public ResponseEntity<ResponseDto> bookAppointment(@RequestBody Appointment appointment){
         var addedAppointment =  appointmentService.bookAppointment(appointment);
         var response = new ResponseDto(true,
                 addedAppointment,
                 HttpStatus.OK.value(),
                 null,
                 null);
-        return new ResponseEntity<>(addedAppointment, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

@@ -1,6 +1,7 @@
 package cs489.apsd.dentalsurgeryapp.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,16 +29,16 @@ public class Appointment {
 
     @ManyToOne
     @JoinColumn(name = "surgeryId")
-    @JsonManagedReference
+    @JsonIgnoreProperties({"appointments"})
     private Surgery surgery;
 
     @ManyToOne
     @JoinColumn(name = "dentistId")
-    @JsonManagedReference
+    @JsonIgnoreProperties("appointments")
     private Dentist dentist;
 
     @ManyToOne
     @JoinColumn(name = "patientId")
-    @JsonManagedReference
+    @JsonIgnoreProperties({"mailingAddress","appointments"})
     private Patient patient;
 }

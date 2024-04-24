@@ -1,6 +1,8 @@
 package cs489.apsd.dentalsurgeryapp.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,9 +24,10 @@ public class Surgery {
     private String phone;
     @OneToOne(cascade = CascadeType.ALL, fetch =FetchType.EAGER)
     @JoinColumn(name = "surgeryLocationId", nullable = false)
+    @JsonIgnoreProperties("patient")
     private Address locationAddress;
 
     @OneToMany(mappedBy = "surgery")
-    @JsonBackReference
+    @JsonIgnoreProperties("surgery")
     private List<Appointment> appointments;
 }

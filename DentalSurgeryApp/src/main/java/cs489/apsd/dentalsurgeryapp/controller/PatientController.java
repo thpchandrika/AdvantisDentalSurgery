@@ -1,6 +1,4 @@
 package cs489.apsd.dentalsurgeryapp.controller;
-
-import cs489.apsd.dentalsurgeryapp.domain.Patient;
 import cs489.apsd.dentalsurgeryapp.dto.ResponseDto;
 import cs489.apsd.dentalsurgeryapp.dto.patient.PatientRequest;
 import cs489.apsd.dentalsurgeryapp.dto.patient.PatientResponse;
@@ -12,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Comparator;
 import java.util.List;
 
 @RestController
