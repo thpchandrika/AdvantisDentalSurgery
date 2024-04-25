@@ -1,16 +1,21 @@
 package cs489.apsd.dentalsurgeryapp.service.impl;
 
+import cs489.apsd.dentalsurgeryapp.constant.RoleType;
 import cs489.apsd.dentalsurgeryapp.domain.Address;
 import cs489.apsd.dentalsurgeryapp.domain.Patient;
+import cs489.apsd.dentalsurgeryapp.domain.Role;
+import cs489.apsd.dentalsurgeryapp.domain.User;
 import cs489.apsd.dentalsurgeryapp.dto.patient.PatientRequest;
 import cs489.apsd.dentalsurgeryapp.dto.patient.PatientResponse;
 import cs489.apsd.dentalsurgeryapp.exceptions.PatientNotFoundException;
 import cs489.apsd.dentalsurgeryapp.repository.AddressRepository;
 import cs489.apsd.dentalsurgeryapp.repository.PatientRepository;
 import cs489.apsd.dentalsurgeryapp.service.PatientService;
+import cs489.apsd.dentalsurgeryapp.service.UserService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +27,11 @@ public class PatientServiceImpl implements PatientService {
     private PatientRepository patientRepository;
 
     @Autowired
-    private AddressRepository addressRepository;
+    private UserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public List<Patient> savePatientList(List<Patient> patients) {
         return patientRepository.saveAll(patients);
@@ -76,24 +85,6 @@ public class PatientServiceImpl implements PatientService {
                                 p.getMailingAddress().getState()
                         ): null
                 )).toList();
-//        var list = patientRepository.findByPatientNumberOrFirstNameOrLastNameOrPhoneNumberOrEmail(searchString)
-//                .stream()
-//                .map(p-> new PatientResponse(
-//                        p.getId(),
-//                        p.getPatientNumber(),
-//                        p.getFirstName(),
-//                        p.getLastName(),
-//                        p.getPhoneNumber(),
-//                        p.getEmail(),
-//                        p.getDob(),
-//                        (p.getMailingAddress() != null)?new Address(
-//                                p.getMailingAddress().getId(),
-//                                p.getMailingAddress().getStreet(),
-//                                p.getMailingAddress().getZip(),
-//                                p.getMailingAddress().getCity(),
-//                                p.getMailingAddress().getState()
-//                        ): null
-//                )).toList();
         return list;
     }
 
@@ -132,6 +123,10 @@ public class PatientServiceImpl implements PatientService {
                         request.mailingAddress().getCity(),
                         request.mailingAddress().getState())
                 );
+        String username = request.email();
+        String password = request.patientNumber();
+        List<String> roles = List.of(RoleType.PATIENT.toString());
+        userService.createUserWithRole(username, password, roles);
         return patientRepository.save(patient);
     }
 

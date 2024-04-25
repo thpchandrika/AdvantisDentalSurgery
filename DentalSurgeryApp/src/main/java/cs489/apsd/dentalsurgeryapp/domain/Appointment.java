@@ -41,4 +41,10 @@ public class Appointment {
     @JoinColumn(name = "patientId")
     @JsonIgnoreProperties({"mailingAddress","appointments"})
     private Patient patient;
+
+    public Appointment(LocalDate appointmentDate, LocalTime appointmentTime, String status) {
+        this.appointmentDate = appointmentDate;
+        this.appointmentTime = appointmentTime;
+        this.status = status;
+    }
 }

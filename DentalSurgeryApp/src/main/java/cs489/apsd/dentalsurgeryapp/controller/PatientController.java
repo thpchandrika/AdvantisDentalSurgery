@@ -22,7 +22,7 @@ public class PatientController {
     private AddressService addressService;
 
 
-    @GetMapping()
+    @GetMapping(value = {"", "/"})
     public ResponseEntity<List<PatientResponse>> getPatientList(){
         var patients =  patientService.getAllPatients();
         var response = new ResponseDto(true,

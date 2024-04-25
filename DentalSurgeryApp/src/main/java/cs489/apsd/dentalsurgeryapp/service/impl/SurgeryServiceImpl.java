@@ -1,6 +1,7 @@
 package cs489.apsd.dentalsurgeryapp.service.impl;
 
 import cs489.apsd.dentalsurgeryapp.domain.Surgery;
+import cs489.apsd.dentalsurgeryapp.exceptions.SurgeryNotFoundException;
 import cs489.apsd.dentalsurgeryapp.repository.SurgeryRepository;
 import cs489.apsd.dentalsurgeryapp.service.SurgeryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,13 @@ public class SurgeryServiceImpl implements SurgeryService {
     @Override
     public Surgery addSurgery(Surgery surgery) {
         return surgeryRepository.save(surgery);
+    }
+
+    @Override
+    public Surgery getSurgeryById(Integer surgeryId) throws SurgeryNotFoundException {
+        return surgeryRepository.findById(surgeryId).orElseThrow(() ->
+                new SurgeryNotFoundException(
+                        String.format("Surgery with surgery id %d is not found", surgeryId)
+                ));
     }
 }

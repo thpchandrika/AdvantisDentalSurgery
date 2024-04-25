@@ -35,4 +35,9 @@ public class Address {
         this.city = city;
         this.state = state;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s %s %s %s", street, zip, city, state);
+    }
 }

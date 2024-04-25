@@ -7,6 +7,5 @@ public record AppointmentRequest(LocalDate appointmentDate,
                                  LocalTime appointmentTime,
                                  Integer dentistId,
                                  Integer patientId,
-                                 Integer surgeryId,
-                                 String status) {
+                                 Integer surgeryId) {
 }

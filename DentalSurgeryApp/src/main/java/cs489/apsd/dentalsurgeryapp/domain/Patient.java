@@ -23,6 +23,7 @@ public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(unique = true)
     private String patientNumber;
     private String firstName;
     private String lastName;

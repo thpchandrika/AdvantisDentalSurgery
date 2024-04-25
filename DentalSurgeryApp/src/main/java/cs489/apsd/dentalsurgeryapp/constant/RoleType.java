@@ -1,7 +1,7 @@
 package cs489.apsd.dentalsurgeryapp.constant;
 
 public enum RoleType {
-    OFFICEMANAGER,
+    OFFICE_MANAGER,
     DENTIST,
     PATIENT
 
