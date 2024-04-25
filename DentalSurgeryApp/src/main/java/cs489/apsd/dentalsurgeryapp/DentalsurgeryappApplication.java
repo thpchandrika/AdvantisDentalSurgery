@@ -14,21 +14,6 @@ import java.util.List;
 @SpringBootApplication
 public class DentalsurgeryappApplication {
 
-	@Autowired
-	private DentistService dentistService;
-
-	@Autowired
-	private PatientService patientService;
-
-	@Autowired
-	private AppointmentService appointmentService;
-
-	@Autowired
-	private SurgeryService surgeryService;
-
-	@Autowired
-	private AddressService addressService;
-
 	public static void main(String[] args) {
 		SpringApplication.run(DentalsurgeryappApplication.class, args);
 	}
