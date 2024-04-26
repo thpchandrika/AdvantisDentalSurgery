@@ -14,6 +14,7 @@ services:
       - mysql-data:/var/lib/mysql
 
   spring-boot-app:
+    image: thpchandrika/dental-surgery-appointment-app:latest
     build: .
     ports:
       - "8080:8080"
