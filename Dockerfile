@@ -10,6 +10,7 @@
 #EXPOSE 8080
 #CMD ["java", "-jar", "./dentalsurgeryapp-0.0.1-SNAPSHOT.jar"]
 
+FROM mysql:latest
 # Use Maven image with Java 17
 FROM maven:3.8.4-openjdk-17 AS build
 WORKDIR /app
