@@ -4,6 +4,7 @@ import cs489.apsd.dentalsurgeryapp.dto.auth.JwtAuthenticationResponse;
 import cs489.apsd.dentalsurgeryapp.dto.auth.SigninRequest;
 import cs489.apsd.dentalsurgeryapp.exceptions.UserNotFoundException;
 import cs489.apsd.dentalsurgeryapp.service.AuthenticationService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "Authentication", description = "an authentication api")
 @RestController
 @RequestMapping("/adsweb/api/v1/auth")
 public class AuthenticationController {

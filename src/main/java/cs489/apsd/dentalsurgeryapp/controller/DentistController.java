@@ -4,11 +4,13 @@ import cs489.apsd.dentalsurgeryapp.dto.ResponseDto;
 import cs489.apsd.dentalsurgeryapp.dto.dentist.DentistRequest;
 import cs489.apsd.dentalsurgeryapp.exceptions.DentistNotFoundException;
 import cs489.apsd.dentalsurgeryapp.service.DentistService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "Dentist", description = "a dentist api")
 @RestController
 @RequestMapping("/adsweb/api/v1/dentists")
 public class DentistController {

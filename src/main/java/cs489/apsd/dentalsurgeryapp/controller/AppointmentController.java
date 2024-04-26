@@ -10,6 +10,7 @@ import cs489.apsd.dentalsurgeryapp.exceptions.DentistNotFoundException;
 import cs489.apsd.dentalsurgeryapp.exceptions.PatientNotFoundException;
 import cs489.apsd.dentalsurgeryapp.exceptions.SurgeryNotFoundException;
 import cs489.apsd.dentalsurgeryapp.service.AppointmentService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "Appointment", description = "an appointment api")
 @RestController
 @RequestMapping("/adsweb/api/v1/appointments")
 public class AppointmentController {

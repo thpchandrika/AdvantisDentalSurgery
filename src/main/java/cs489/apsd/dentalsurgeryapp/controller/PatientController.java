@@ -5,6 +5,7 @@ import cs489.apsd.dentalsurgeryapp.dto.patient.PatientResponse;
 import cs489.apsd.dentalsurgeryapp.exceptions.PatientNotFoundException;
 import cs489.apsd.dentalsurgeryapp.service.AddressService;
 import cs489.apsd.dentalsurgeryapp.service.PatientService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+@Tag(name = "Patient", description = "a patient api")
 @RestController
 @RequestMapping("/adsweb/api/v1/patients")
 public class PatientController {
