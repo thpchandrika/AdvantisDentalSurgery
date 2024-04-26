@@ -11,7 +11,6 @@ INSERT INTO `advantissurgerydb`.`patients` (`dob`, `id`, `mailing_address_id`, `
 INSERT INTO `advantissurgerydb`.`patients` (`dob`, `id`, `mailing_address_id`, `email`, `first_name`, `last_name`, `patient_number`, `phone_number`) VALUES ('1995-10-10', '2', '2', 'jill@mailinator.com', 'Jill', 'Bell', 'P105', '65434564');
 INSERT INTO `advantissurgerydb`.`patients` (`dob`, `id`, `mailing_address_id`, `email`, `first_name`, `last_name`, `patient_number`, `phone_number`) VALUES ('1993-08-14', '3', '3', 'ian@mailinator.com', 'Ian', 'MacKay', 'P108', '5432456');
 INSERT INTO `advantissurgerydb`.`patients` (`dob`, `id`, `mailing_address_id`, `email`, `first_name`, `last_name`, `patient_number`, `phone_number`) VALUES ('1990-10-12', '4', '4', 'john@mailinator.com', 'John', 'Walker', 'P110', '45643245');
-INSERT INTO `advantissurgerydb`.`patients` (`dob`, `id`, `mailing_address_id`, `email`, `first_name`, `last_name`, `patient_number`, `phone_number`) VALUES ('1990-10-12', '4', '4', 'thpchandrika@mailinator.com', 'Chandrika', 'Thapa', 'PChan', '65456654');
 
 INSERT INTO `advantissurgerydb`.`surgeries` (`id`, `surgery_location_id`, `name`, `number`, `phone`) VALUES ('1', '1', 'Wisom Teeth Surgery', 'S15', '6543245');
 INSERT INTO `advantissurgerydb`.`surgeries` (`id`, `surgery_location_id`, `name`, `number`, `phone`) VALUES ('2', '2', 'Root Canal Surgery', 'S10', '987654323');

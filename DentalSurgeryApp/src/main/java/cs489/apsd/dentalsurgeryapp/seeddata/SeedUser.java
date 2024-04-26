@@ -42,6 +42,6 @@ public class SeedUser implements CommandLineRunner {
         List<String> managerRoles = List.of(RoleType.OFFICE_MANAGER.toString());
         userService.createUserWithRole("officemanager", passwordEncoder.encode("manager"),managerRoles);
 
-//        emailService.sendTestEmail();
+       // emailService.sendTestEmail();
     }
 }
