@@ -15,6 +15,7 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class AppointmentController {
     private AppointmentService appointmentService;
 
     @GetMapping(value = {"","/"})
+    @PreAuthorize("hasAuthority('OFFICE_MANAGER')")
     public ResponseEntity<ResponseDto> getAllAppointment(){
         var appointments =  appointmentService.getAllAppointments();
         var response = new ResponseDto(true,
@@ -39,6 +41,7 @@ public class AppointmentController {
     }
 
     @GetMapping("/appointmentofdentist/{dentistId}")
+    @PreAuthorize("hasAuthority('OFFICE_MANAGER') | hasAuthority('DENTIST')")
     public ResponseEntity<ResponseDto> getAppointmentsOfDentist(@PathVariable @NotNull Integer dentistId){
         var appointments =  appointmentService.getDentistsAppointments(dentistId);
         var response = new ResponseDto(true,
@@ -50,6 +53,7 @@ public class AppointmentController {
     }
 
     @GetMapping("/appointmentofpatient/{patientId}")
+    @PreAuthorize("hasAuthority('OFFICE_MANAGER') | hasAuthority('PATIENT')")
     public ResponseEntity<ResponseDto> getAppointmentsOfPatient(@PathVariable @NotNull Integer patientId){
         var appointments =  appointmentService.getPatientsAppointments(patientId);
         var response = new ResponseDto(true,
@@ -61,6 +65,7 @@ public class AppointmentController {
     }
 
     @PostMapping("/book")
+    @PreAuthorize("hasAuthority('OFFICE_MANAGER')")
     public ResponseEntity<ResponseDto> bookAppointment(@RequestBody AppointmentRequest appointmentRequest)
             throws SurgeryNotFoundException, DentistNotFoundException, PatientNotFoundException {
         var addedAppointment =  appointmentService.bookAppointment(appointmentRequest);
@@ -73,6 +78,7 @@ public class AppointmentController {
     }
 
     @PostMapping("/request")
+    @PreAuthorize("hasAuthority('PATIENT')")
     public ResponseEntity<ResponseDto> requestAppointment(@RequestBody AppointmentRequest appointmentRequest)
             throws SurgeryNotFoundException, DentistNotFoundException, PatientNotFoundException {
         var addedAppointment =  appointmentService.requestAppointment(appointmentRequest);
@@ -85,6 +91,7 @@ public class AppointmentController {
     }
 
     @PatchMapping("/approve/{id}")
+    @PreAuthorize("hasAuthority('OFFICE_MANAGER')")
     public ResponseEntity<ResponseDto> approveAppointment(@PathVariable Integer id) throws AppointmentNotFoundException {
         var approvedAppointment = appointmentService.changeAppointmentStatus(id, AppointmentStatus.APPROVED.toString());
         var response = new ResponseDto(
@@ -98,6 +105,7 @@ public class AppointmentController {
     }
 
     @PatchMapping("/cancel/{id}")
+    @PreAuthorize("hasAuthority('OFFICE_MANAGER')")
     public ResponseEntity<ResponseDto> cancelAppointment(@PathVariable Integer id) throws AppointmentNotFoundException {
         var approvedAppointment = appointmentService.changeAppointmentStatus(id, AppointmentStatus.CANCELLED.toString());
         var response = new ResponseDto(
@@ -111,6 +119,7 @@ public class AppointmentController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('OFFICE_MANAGER')")
     public ResponseEntity<ResponseDto> updateAppointment(@RequestBody AppointmentRequest appointmentRequest, @PathVariable Integer id)
             throws AppointmentNotFoundException, SurgeryNotFoundException, DentistNotFoundException, PatientNotFoundException {
         var updatedAppointment = appointmentService.updateAppointment(id, appointmentRequest);

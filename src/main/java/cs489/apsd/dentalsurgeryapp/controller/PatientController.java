@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class PatientController {
 
 
     @GetMapping(value = {"", "/"})
+    @PreAuthorize("hasAuthority('OFFICE_MANAGER')")
     public ResponseEntity<List<PatientResponse>> getPatientList(){
         var patients =  patientService.getAllPatients();
         var response = new ResponseDto(true,
@@ -36,6 +38,7 @@ public class PatientController {
     }
 
     @GetMapping("/search/{searchString}")
+    @PreAuthorize("hasAuthority('OFFICE_MANAGER')")
     public ResponseEntity<List<PatientResponse>> searchPatient(){
         var patients =  patientService.getAllPatients();
         var response = new ResponseDto(true,
@@ -47,6 +50,7 @@ public class PatientController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('OFFICE_MANAGER')")
     public ResponseEntity<?> getPatient(@PathVariable Integer id) throws PatientNotFoundException {
         var patient =  patientService.getPatientById(id);
         var response = new ResponseDto(true,
@@ -58,6 +62,7 @@ public class PatientController {
     }
 
     @PostMapping("/")
+    @PreAuthorize("hasAuthority('OFFICE_MANAGER')")
     public ResponseEntity<?> addPatient(@RequestBody @Valid PatientRequest request){
         var newPatient = patientService.savePatient(request);
         var response = new ResponseDto(true,
@@ -69,6 +74,7 @@ public class PatientController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('OFFICE_MANAGER')")
     public ResponseEntity<ResponseDto> updatePatient(@PathVariable Integer id,
                                            @RequestBody PatientRequest request) throws PatientNotFoundException {
         var updatedPatient = patientService.updatePatient(id,request);
@@ -81,6 +87,7 @@ public class PatientController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('OFFICE_MANAGER')")
     public  ResponseEntity<ResponseDto> deletePatient(@PathVariable Integer id) throws PatientNotFoundException {
         patientService.deletePatient(id);
         var response = new ResponseDto(true,
