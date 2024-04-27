@@ -2,6 +2,7 @@ package cs489.apsd.dentalsurgeryapp.service;
 
 
 import cs489.apsd.dentalsurgeryapp.domain.User;
+import cs489.apsd.dentalsurgeryapp.exceptions.UserNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,5 +11,5 @@ public interface UserService {
 
      User addUser(User user);
      User createUserWithRole(String username, String password, List<String> role);
-     User findByUsername(String username);
+     User findByUsername(String username) throws UserNotFoundException;
 }

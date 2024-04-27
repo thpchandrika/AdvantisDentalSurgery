@@ -2,6 +2,7 @@ package cs489.apsd.dentalsurgeryapp.service.impl;
 
 import cs489.apsd.dentalsurgeryapp.domain.Role;
 import cs489.apsd.dentalsurgeryapp.domain.User;
+import cs489.apsd.dentalsurgeryapp.exceptions.UserNotFoundException;
 import cs489.apsd.dentalsurgeryapp.repository.UserRepository;
 import cs489.apsd.dentalsurgeryapp.service.RoleService;
 import cs489.apsd.dentalsurgeryapp.service.UserService;
@@ -46,7 +47,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByUsername(String username) {
+    public User findByUsername(String username)  {
         return userRepository.findByUsername(username);
     }
 }

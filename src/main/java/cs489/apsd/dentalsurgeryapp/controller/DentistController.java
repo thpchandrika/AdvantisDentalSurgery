@@ -18,7 +18,7 @@ public class DentistController {
     @Autowired
     private DentistService dentistService;
 
-    @GetMapping()
+    @GetMapping(value = {"", "/"})
     public ResponseEntity<ResponseDto> getAllDentist(){
         var dentistResponse = dentistService.getAllDentist();
         var response = new ResponseDto(true, dentistResponse, HttpStatus.OK.value(), null, null);
@@ -26,13 +26,13 @@ public class DentistController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseDto> getAllDentist(@PathVariable Integer id) throws DentistNotFoundException {
+    public ResponseEntity<ResponseDto> getDentistById(@PathVariable Integer id) throws DentistNotFoundException {
         var dentistResponse = dentistService.getDentistById(id);
         var response = new ResponseDto(true, dentistResponse, HttpStatus.OK.value(), null, null);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @PostMapping(value = {"", "/"})
     public ResponseEntity<ResponseDto> registerDentist(@RequestBody DentistRequest request){
         var dentistResponse = dentistService.addDentist(request);
         var response = new ResponseDto(true, dentistResponse, HttpStatus.OK.value(), null, null);

@@ -31,29 +31,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.username(), request.password()));
         User user = userService.findByUsername(request.username());
-//                .orElseThrow(() -> new UserNotFoundException("Invalid email or password."));
         String jwt = jwtUtilityService.generateToken(user);
         JwtAuthenticationResponse jwtAuthenticationResponse = new JwtAuthenticationResponse(jwt);
         return jwtAuthenticationResponse;
-//        JwtAuthenticationResponse userAuthResponse = null;
-//        try {
-//            var username = request.username();
-//            var password = request.password();
-//            authenticationManager.authenticate(
-//                    new UsernamePasswordAuthenticationToken(username,
-//                            password)
-//            );
-//
-//            var user = userService.findByUsername(username).orElseThrow(()-> new UserNotFoundException("User not found"));
-//            if(user != null) {
-//                var jwtToken = jwtUtilityService.generateToken(user);
-//                userAuthResponse = new JwtAuthenticationResponse(jwtToken);
-//            }
-//        } catch (Exception ex) {
-//            System.out.println("UserAuthException is: " + ex);
-//            throw ex;
-//        }
-//       return  userAuthResponse;
-//    }
     }
 }

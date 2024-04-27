@@ -40,7 +40,7 @@ public class SeedUser implements CommandLineRunner {
 
         System.out.println("==============Seeding user office manager with role=================");
         List<String> managerRoles = List.of(RoleType.OFFICE_MANAGER.toString());
-        userService.createUserWithRole("officemanager", passwordEncoder.encode("manager"),managerRoles);
+        userService.createUserWithRole("officemanager", "manager",managerRoles);
 
        // emailService.sendTestEmail();
     }

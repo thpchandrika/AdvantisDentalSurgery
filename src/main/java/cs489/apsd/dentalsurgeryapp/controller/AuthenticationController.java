@@ -14,7 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "Authentication", description = "an authentication api")
+//@Tag(name = "Authentication", description = "an authentication api")
 @RestController
 @RequestMapping("/adsweb/api/v1/auth")
 public class AuthenticationController {
@@ -27,14 +27,15 @@ public class AuthenticationController {
         return authenticationService.login(request);
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<String> all() {
-        return new ResponseEntity<>("Hello all", HttpStatus.OK);
-    }
-
-    @GetMapping("/admin")
-    @PreAuthorize("hasAuthority('OFFICEMANAGER')")
-    public ResponseEntity<String> admin() {
-        return new ResponseEntity<>("Hello admin", HttpStatus.OK);
-    }
+//    @GetMapping("/all")
+//    public ResponseEntity<String> all() {
+//        return new ResponseEntity<>("Hello all", HttpStatus.OK);
+//    }
+//
+//    @GetMapping("/admin")
+//    //@PreAuthorize("hasAuthority('PATIENT') || hasAuthority('OFFICE_MANAGER')")
+//    @PreAuthorize("hasAuthority('OFFICE_MANAGER')")
+//    public ResponseEntity<String> admin() {
+//        return new ResponseEntity<>("Hello admin", HttpStatus.OK);
+//    }
 }
