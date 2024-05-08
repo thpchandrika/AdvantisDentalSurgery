@@ -22,7 +22,7 @@ import java.util.List;
 
 @Tag(name = "Appointment", description = "an appointment api")
 @RestController
-@RequestMapping("/adsweb/api/v1/appointments")
+@RequestMapping("api/ads/v1/appointments")
 public class AppointmentController {
 
     @Autowired

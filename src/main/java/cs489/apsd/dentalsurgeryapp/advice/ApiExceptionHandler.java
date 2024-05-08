@@ -14,13 +14,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.nio.file.AccessDeniedException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestControllerAdvice
-public class DentalWebApiExceptionHandler extends ResponseEntityExceptionHandler {
+public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(PatientNotFoundException.class)
     protected ResponseEntity<ResponseDto> handlePatientNotFoundException(PatientNotFoundException patientNotFoundException) {
@@ -44,16 +43,27 @@ public class DentalWebApiExceptionHandler extends ResponseEntityExceptionHandler
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(AccessDeniedException.class)
-    protected ResponseEntity<ResponseDto> handleAccessDeniedException(AccessDeniedException ex) {
-        var response = new ResponseDto(false,
-                null,
-                HttpStatus.UNAUTHORIZED.value(),
-                ex.getMessage(),
-                null
-        );
-        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
-    }
+//    @ExceptionHandler(AccessDeniedException.class)
+//    protected ResponseEntity<ResponseDto> handleAccessDeniedException(AccessDeniedException ex) {
+//        var response = new ResponseDto(false,
+//                null,
+//                HttpStatus.UNAUTHORIZED.value(),
+//                ex.getMessage(),
+//                null
+//        );
+//        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+//    }
+//
+//    @ExceptionHandler(AuthenticationException.class)
+//    protected ResponseEntity<ResponseDto> handleAuthenticationException(AuthenticationException ex) {
+//        var response = new ResponseDto(false,
+//                null,
+//                HttpStatus.UNAUTHORIZED.value(),
+//                ex.getMessage(),
+//                null
+//        );
+//        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+//    }
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
@@ -73,13 +83,33 @@ public class DentalWebApiExceptionHandler extends ResponseEntityExceptionHandler
 
     @ExceptionHandler(Exception.class)
     protected ResponseEntity<ResponseDto> handleException(Exception ex) {
-        var response = new ResponseDto(false,
-                null,
-                HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                ex.getMessage(),
-                null
-        );
-        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        System.out.println(ex.getClass().getSimpleName());
+        if (ex.getClass().getSimpleName().equals("BadCredentialsException")){
+            var response = new ResponseDto(false,
+                    null,
+                    HttpStatus.BAD_REQUEST.value(),
+                    ex.getMessage(),
+                    null
+            );
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        } else if (ex.getClass().getSimpleName().equals("AccessDeniedException")) {
+            var response = new ResponseDto(false,
+                    null,
+                    HttpStatus.UNAUTHORIZED.value(),
+                    ex.getMessage(),
+                    null
+            );
+            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
+        }else
+        {
+            var response = new ResponseDto(false,
+                    null,
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    ex.getMessage(),
+                    null
+            );
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }

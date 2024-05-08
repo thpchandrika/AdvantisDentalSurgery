@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "Dentist", description = "a dentist api")
 @RestController
-@RequestMapping("/adsweb/api/v1/dentists")
+@RequestMapping("/api/ads/v1/dentists")
 public class DentistController {
 
     @Autowired

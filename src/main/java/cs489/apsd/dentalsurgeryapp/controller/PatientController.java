@@ -16,7 +16,7 @@ import java.util.List;
 
 @Tag(name = "Patient", description = "a patient api")
 @RestController
-@RequestMapping("/adsweb/api/v1/patients")
+@RequestMapping("/api/ads/v1/patients")
 public class PatientController {
     @Autowired
     private PatientService patientService;
@@ -61,7 +61,7 @@ public class PatientController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @PostMapping(value = {"","/"})
     @PreAuthorize("hasAuthority('OFFICE_MANAGER')")
     public ResponseEntity<?> addPatient(@RequestBody @Valid PatientRequest request){
         var newPatient = patientService.savePatient(request);

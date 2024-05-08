@@ -61,7 +61,7 @@ public class DentistControllerTests {
         dentists.add(new Dentist("D002","Jane", "Smith", "9876543210", "jane.smith@mailinator.com", "Orthodontics"));
         when(dentistService.getAllDentist()).thenReturn(DentistAdapter.getDentistResponseList(dentists));
 
-        mockMvc.perform(get("/adsweb/api/v1/dentists"))
+        mockMvc.perform(get("/ads/dentists"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.isSuccess").value(true))
                 .andExpect(jsonPath("$.data", hasSize(2)))
@@ -74,7 +74,7 @@ public class DentistControllerTests {
         Dentist dentist = new Dentist("D001", "John", "Doe", "1234567890", "john.doe@mailinator.com", "General Dentistry");
         when(dentistService.getDentistById(1)).thenReturn(DentistAdapter.getDentistResponse(dentist));
 
-        mockMvc.perform(get("/adsweb/api/v1/dentists/{id}", 1))
+        mockMvc.perform(get("/ads/dentists/{id}", 1))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.isSuccess").value(true))
                 .andExpect(jsonPath("$.data.dentistID").value("D001"))
@@ -93,7 +93,7 @@ public class DentistControllerTests {
         DentistResponse dentistResponse = new DentistResponse(1,"D001", "John", "Doe", "1234567890", "john.doe@example.com", "General Dentistry");
         when(dentistService.addDentist(any(DentistRequest.class))).thenReturn(dentistResponse);
 
-        mockMvc.perform(post("/adsweb/api/v1/dentists")
+        mockMvc.perform(post("/ads/dentists")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(request)))
                 .andExpect(status().isOk())

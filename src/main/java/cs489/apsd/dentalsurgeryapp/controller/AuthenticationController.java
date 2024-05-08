@@ -6,36 +6,20 @@ import cs489.apsd.dentalsurgeryapp.exceptions.UserNotFoundException;
 import cs489.apsd.dentalsurgeryapp.service.AuthenticationService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
 
-//@Tag(name = "Authentication", description = "an authentication api")
+@Tag(name = "Authentication", description = "an authentication api")
 @RestController
-@RequestMapping("/adsweb/api/v1/auth")
+@RequestMapping("/api/ads/v1/auth")
 public class AuthenticationController {
 
     @Autowired
     private AuthenticationService authenticationService;
 
     @PostMapping("/login")
-    public JwtAuthenticationResponse signin(@RequestBody SigninRequest request) throws UserNotFoundException {
+    public JwtAuthenticationResponse signin(@RequestBody SigninRequest request)
+            throws UserNotFoundException, AccessDeniedException {
         return authenticationService.login(request);
     }
-
-//    @GetMapping("/all")
-//    public ResponseEntity<String> all() {
-//        return new ResponseEntity<>("Hello all", HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/admin")
-//    //@PreAuthorize("hasAuthority('PATIENT') || hasAuthority('OFFICE_MANAGER')")
-//    @PreAuthorize("hasAuthority('OFFICE_MANAGER')")
-//    public ResponseEntity<String> admin() {
-//        return new ResponseEntity<>("Hello admin", HttpStatus.OK);
-//    }
 }

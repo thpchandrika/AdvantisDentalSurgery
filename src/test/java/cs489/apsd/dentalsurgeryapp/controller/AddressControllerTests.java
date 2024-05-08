@@ -14,7 +14,7 @@ public class AddressControllerTests {
 
     @Test
     public void testGetAddressList() throws Exception {
-        String url = "http://localhost:8080/adsweb/api/v1/addresses/";
+        String url = "http://localhost:8080/ads/addresses/";
         ResponseEntity<ResponseDto> response = restTemplate.getForEntity(url, ResponseDto.class);
         assertEquals(200, response.getStatusCode().value());
         ResponseDto responseBody = response.getBody();

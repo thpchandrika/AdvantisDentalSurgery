@@ -16,13 +16,13 @@ import java.util.List;
 
 @Tag(name = "Address", description = "an address api")
 @RestController
-@RequestMapping("/adsweb/api/v1/addresses")
+@RequestMapping("api/ads/v1/addresses")
 public class AddressController {
 
     @Autowired
     private AddressService addressService;
 
-    @GetMapping("/")
+    @GetMapping(value = {"", "/"})
     public ResponseEntity<ResponseDto> getAddressList(){
         var addresses =  addressService.getAllAddress();
         var response = new ResponseDto(true,
